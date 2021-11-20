@@ -1,5 +1,8 @@
 ﻿//Найти максимальное из трех чисел
 
+// Status: решено
+
+
 int FindMax(int a, int b, int c)
 {
 int max = a;

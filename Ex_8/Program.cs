@@ -1,6 +1,6 @@
 ﻿//Показать четные числа от 1 до N
 
-//Status: solved
+//Status: решено
 
 void FindEven(int N)
 {
