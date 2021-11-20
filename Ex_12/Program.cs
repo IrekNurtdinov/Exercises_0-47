@@ -8,6 +8,6 @@ int newNum = number/100*10 + number%10;
 return newNum;
 }
 
-int a = 653;
+int a = -653;
 
 Console.Write(DelSecond(a));
