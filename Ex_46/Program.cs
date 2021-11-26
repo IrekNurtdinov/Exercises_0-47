@@ -3,60 +3,90 @@
 
 
 
-string a = "1(-555,0) (2,0) (2,2) (0,2)";
-// int k = 2;
-
-
 
 
 int FindIndexOf(string text, char sign)   // метод возвращает индекс (int) первого знака 'sign' (char) в строке text (string)
 {
-  int index = 0;
-    
-  for (int i = 0; i < text.Length; i++)
-  {
-    if (text[i] == sign) 
+    int index = 0;
+
+    for (int i = 0; i < text.Length; i++)
     {
-      index = i;
-      break; 
-    } 
-  }
-  return index;
+        if (text[i] == sign)
+        {
+            index = i;
+            break;
+        }
+    }
+    return index;
 }
 
 string DeleteChar(string text, char sign)  // метод возвращает строку string text удалив из нее все знаки char 'sign'
 {
-  string newText = String.Empty;
-  for (int i = 0; i < text.Length; i++)
-  {
-    if (text[i] != sign)
+    string newText = String.Empty;
+    for (int i = 0; i < text.Length; i++)
     {
-        newText += $"{text[i]}";
+        if (text[i] != sign)
+        {
+            newText += $"{text[i]}";
+        }
     }
-  }
-  return newText;
+    return newText;
 }
 
-int NumBetweenSign(string text, char firstSign, char secondSign) // метод возвращает int число, которое находится между символами firstSign и secondSign в строке text                                                               
+int NumBetweenSign(string text, char firstSign, char secondSign) // метод возвращает int число, которое находится между первыми символами firstSign и secondSign в строке text                                                               
 {
-  int count = FindIndexOf(text, secondSign) - FindIndexOf(text, firstSign)-1;
-  string num = string.Empty;
-  for (int i = FindIndexOf(text, firstSign); i <= count; i++)
-  {
-      num += $"{text[i+1]}";
-  }
-  int number = Convert.ToInt32(num);
-   return number;
+    int count = FindIndexOf(text, secondSign) - FindIndexOf(text, firstSign) - 1;
+    string num = string.Empty;
+    for (int i = FindIndexOf(text, firstSign); i < (count + FindIndexOf(text, firstSign)); i++)
+    {
+        num += $"{text[i + 1]}";
+    }
+
+    int number = Convert.ToInt32(num);
+    return number;
+}
+
+string CutString(string text, int index)  // метод возвращает строку удалив все символы которыее находятся левее от text[index+1] (т.е. включая text[index])
+{
+    string shortText = string.Empty;
+    for (int i = 0; i < text.Length; i++)
+    {
+        if (i > index)
+        {
+            shortText += $"{text[i]}";
+        }
+    }
+    return shortText;
+}
+
+int[] NumFromStrToArr(string text)  // метод возвращает массив состоящий из двух первых чисел, находящихсяв строке text между символами '('  ','  ')'
+{
+    int[] Arr = new int[2];
+    int i = 0;
+    Arr[i] = NumBetweenSign(text, '(', ',');
+    //System.Console.WriteLine(Arr[i]);
+    Arr[i + 1] = NumBetweenSign(text, ',', ')');
+    //System.Console.WriteLine(Arr[i + 1]);
+    return Arr;
+
 }
 
 
-Console.Write(NumBetweenSign(a,'(',','));
+string Scaling(string text, int k) // метод возвращает строку text с координатами записанными в формате (x1, y1) умножая координаты на коэффициент k.
+{
+    string newText = string.Empty;
+    while (text.Length > 0)
+    {
+        int[] Arr = NumFromStrToArr(text);
+        newText += $"({Arr[0]* k},{Arr[1]*k}) ";
+        text = CutString(text, FindIndexOf(text, ')'));
+        
+    }
+    return newText;
+}
 
-//System.Console.WriteLine(FindIndexOf(a,','));
+string a = "(-5550,3) (44,12) (6,83) (712,9)";
+int k = 2;
 
-// string b = DeleteChar(a,'"');
-// string c = DeleteChar(b,'(');
-// string d = DeleteChar(c,')');
 
-// System.Console.WriteLine(d);
-
+System.Console.WriteLine(Scaling(a,k));
