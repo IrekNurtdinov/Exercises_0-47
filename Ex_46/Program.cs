@@ -1,11 +1,10 @@
 ﻿// 46. Написать программу масштабирования фигуры
 
 
+// Status: решено
 
 
-
-
-int FindIndexOf(string text, char sign)   // метод возвращает индекс (int) первого знака 'sign' (char) в строке text (string)
+int FindIndexOf(string text, char sign)   // метод возвращает индекс (int) первого сивола 'sign' (char) в строке text (string)
 {
     int index = 0;
 
@@ -20,18 +19,18 @@ int FindIndexOf(string text, char sign)   // метод возвращает и�
     return index;
 }
 
-string DeleteChar(string text, char sign)  // метод возвращает строку string text удалив из нее все знаки char 'sign'
-{
-    string newText = String.Empty;
-    for (int i = 0; i < text.Length; i++)
-    {
-        if (text[i] != sign)
-        {
-            newText += $"{text[i]}";
-        }
-    }
-    return newText;
-}
+// string DeleteChar(string text, char sign)  // метод возвращает строку text удалив из нее все символы 'sign'
+// {
+//     string newText = String.Empty;
+//     for (int i = 0; i < text.Length; i++)
+//     {
+//         if (text[i] != sign)
+//         {
+//             newText += $"{text[i]}";
+//         }
+//     }
+//     return newText;
+// }
 
 int NumBetweenSign(string text, char firstSign, char secondSign) // метод возвращает int число, которое находится между первыми символами firstSign и secondSign в строке text                                                               
 {
@@ -46,7 +45,7 @@ int NumBetweenSign(string text, char firstSign, char secondSign) // метод �
     return number;
 }
 
-string CutString(string text, int index)  // метод возвращает строку удалив все символы которыее находятся левее от text[index+1] (т.е. включая text[index])
+string CutString(string text, int index)  // метод возвращает строку удалив из неё все символы которые находятся левее от text[index+1] (т.е. включая text[index])
 {
     string shortText = string.Empty;
     for (int i = 0; i < text.Length; i++)
