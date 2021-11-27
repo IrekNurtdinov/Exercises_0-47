@@ -15,19 +15,85 @@ string CutString(string text, int index)  // метод возвращает с�
     return shortText;
 }
 
-string text = "25 -123 54 -15 2 32 -5 0 65";
 
-string num = string.Empty;
-for (int i = 0; i < text.Length; i++)
+
+// string num = string.Empty;
+// int number = 0;
+// for (int i = 0; i <= (text.Length-1); i++)
+// {
+//     if (text[i] == ' ')
+//     {
+//         for (int j = 0; j < i; j++)
+//         {
+//             num += $"{text[j]}";
+//         }
+//         number = Convert.ToInt32(num);
+//         text = CutString(text, i);
+//         i = 0;
+//         System.Console.WriteLine(number);
+//         num = String.Empty;
+//     }
+//     else if (i == (text.Length-1))
+//     {
+//         num = text;
+//         number = Convert.ToInt32(num);
+//         System.Console.WriteLine(number);
+//     }
+// }
+
+
+
+int FindFirstNumber(string text, char delimiter)  // метод возвращает первое число из строки чисел text, которое находится до разделительного символа ( в нашем случае будет пробел ' ')
 {
-    if (text[i] == ' ')
+
+    string num = string.Empty;
+    int number = 0;
+    for (int i = 0; i < text.Length; i++)
     {
-        for (int j = 0; j < i; j++)
+        if (text[i] == delimiter)
         {
-            num += $"{text[j]}";
+            for (int j = 0; j < i; j++)
+            {
+                num += $"{text[j]}";
+            }
+            number = Convert.ToInt32(num);
+            break;
         }
-        text = CutString(text, i);
+
     }
+    return number;
 }
-    
-System.Console.WriteLine(num);
+
+int CountPositiveNum()
+{
+    System.Console.WriteLine("Введите любое количество отрицательных или положительных целых чисел в одну строку через пробел, затем нажмите Enter");
+    string text = Console.ReadLine();
+    System.Console.WriteLine(text.Length);
+    int count = 0;
+    for (int i = 0; i <= text.Length; i++)
+    {
+        if (FindFirstNumber(text, ' ') > 0)
+        {
+            count++;
+            System.Console.WriteLine(count);
+        }
+        else if (i == text.Length)
+        {
+            string num = text;
+            int number = Convert.ToInt32(num);
+            if (number > 0)
+            {
+                count++;
+            }
+        }
+
+        text = CutString(text, text.IndexOf(' '));
+        System.Console.WriteLine(text);
+    }
+
+    return count;
+
+
+}
+
+System.Console.WriteLine(CountPositiveNum());
